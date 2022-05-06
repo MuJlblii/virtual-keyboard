@@ -9,6 +9,7 @@ const keys = {
   Backquote: {
     english: '`',
     russian: 'ё',
+    style: 'meta',
   },
   Digit1: {
     english: '1',
@@ -62,11 +63,12 @@ const keys = {
   Backspace: {
     english: 'Backspace',
     russian: 'Backspace',
-    // style: ''
+    style: 'keys-2_25',
   },
   Tab: {
     english: 'Tab',
     russian: 'Tab',
+    style: 'keys-1_25',
   },
   KeyQ: {
     english: 'q',
@@ -123,10 +125,12 @@ const keys = {
   Delete: {
     english: 'DEL',
     russian: 'DEL',
+    style: 'meta',
   },
   CapsLock: {
     english: 'Caps Lock',
     russian: 'Caps Lock',
+    style: 'keys-2_25',
   },
   KeyA: {
     english: 'a',
@@ -175,14 +179,16 @@ const keys = {
   Enter: {
     english: 'ENTER',
     russian: 'ENTER',
-  },
-  IntlBackslash: {
-    english: '\\',
-    russian: '\\',
+    style: 'keys-2_25',
   },
   ShiftLeft: {
     english: 'Shift',
     russian: 'Shift',
+    style: 'keys-2_25',
+  },
+  IntlBackslash: {
+    english: '\\',
+    russian: '\\',
   },
   KeyZ: {
     english: 'z',
@@ -227,50 +233,60 @@ const keys = {
   ArrowUp: {
     english: '▲',
     russian: '▲',
+    style: 'meta',
   },
   ShiftRight: {
     english: 'Shift',
     russian: 'Shift',
+    style: 'meta',
   },
   ControlLeft: {
     english: 'Ctrl',
     russian: 'Ctrl',
+    style: 'keys-1_5',
   },
   MetaLeft: {
     english: 'Win',
     russian: 'Win',
+    style: 'meta',
   },
   AltLeft: {
     english: 'Alt',
     russian: 'Alt',
+    style: 'meta',
   },
   Space: {
     english: ' ',
     russian: ' ',
+    style: 'keys-6',
   },
   AltRight: {
     english: 'Alt',
     russian: 'Alt',
+    style: 'meta',
   },
   ControlRight: {
     english: 'Ctrl',
     russian: 'Ctrl',
+    style: 'keys-1_5',
   },
   ArrowLeft: {
     english: '◄',
     russian: '◄',
+    style: 'meta',
   },
   ArrowDown: {
     english: '▼',
     russian: '▼',
+    style: 'meta',
   },
   ArrowRight: {
     english: '►',
     russian: '►',
+    style: 'meta',
   },
 
 };
-// const keyboard = window;
 
 document.addEventListener('keypress', (event) => {
   console.log(event);
@@ -291,13 +307,10 @@ document.addEventListener('keypress', (event) => {
 //   return b;
 });
 
-// const arrayKeys = [keys];
 console.log('try to create array - ', Object.entries(keys));
 const arrayKeys = Object.entries(keys);
 let keyboardRow = document.createElement('div');
 keyboardRow.classList.add('key-row');
-// const keyboardKeys = document.createElement('div');
-// keyboardKeys.classList.add('keys');
 for (let i = 0; i < Object.entries(keys).length; i++) {
   if (i === 0) {
     keyboardRow = document.createElement('div');
@@ -317,6 +330,12 @@ for (let i = 0; i < Object.entries(keys).length; i++) {
   }
   const keyboardKeys = document.createElement('div');
   keyboardKeys.classList.add('keys');
+  if (arrayKeys[i][1].style) {
+    keyboardKeys.classList.add(arrayKeys[i][1].style);
+    keyboardKeys.classList.add('meta');
+  } else {
+    keyboardKeys.classList.add('letter');
+  }
   keyboardKeys.innerHTML = arrayKeys[i][1].english;
   keyboardRow.appendChild(keyboardKeys);
   keyboard.appendChild(keyboardRow);
@@ -324,3 +343,29 @@ for (let i = 0; i < Object.entries(keys).length; i++) {
 }
 keyboardWrapper.appendChild(keyboard);
 body.appendChild(keyboardWrapper);
+
+function hovered(event) {
+  // console.log('target -', event.target);
+  // console.log('currentTarget -', event.currentTarget);
+  if ((event.target !== event.currentTarget) && (event.target !== keyboard)
+  && (!event.target.className.includes('key-row'))) {
+    const hoveredItem = event.target;
+    // console.log('hovered item -', hoveredItem);
+    hoveredItem.classList.toggle('hovered');
+  }
+  event.stopPropagation();
+  keyboard.addEventListener('mouseout', hovered, false);
+}
+
+function active(event) {
+  if ((event.target !== event.currentTarget) && (event.target !== keyboard)
+  && (!event.target.className.includes('key-row'))) {
+    const hoveredItem = event.target;
+    hoveredItem.classList.toggle('active');
+  }
+  event.stopPropagation();
+  keyboard.addEventListener('mouseup', active, false);
+}
+
+keyboard.addEventListener('mouseover', hovered, false);
+keyboard.addEventListener('mousedown', active, false);

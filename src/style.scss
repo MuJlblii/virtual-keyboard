@@ -10,16 +10,18 @@
     flex-direction: column;
     // flex-wrap: wrap;
     gap: 10px;
-    max-width: 800px;
+    max-width: 770px;
     // height: 100px;
     border: 2px solid black;
     padding: 10px;
     box-sizing: border-box;
+    background: $keyboardBackground;
 }
 
 .key-row {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     gap: 6px;
     box-sizing: border-box;
 }
@@ -30,8 +32,49 @@
     justify-content: center;
     width: $size-1;
     height: $size-1;
-    border-radius: 3px;
-    border: 2px solid black;
+    border-radius: 5px;
+    // border: 2px solid black;
     box-shadow: 3px 5px 5px rgba(0,0,0,0.5);
     cursor: pointer;
+    font-weight: 600;
+}
+
+.meta {
+    color: $metaKeys;
+    background: $metaKeysBackground;
+    
+}
+
+.letter {
+    color: $letterKeys;
+    background: $letterKeysBackground;
+}
+
+.hovered {
+    background: $hoveredKeys;
+    transition: all 0.5s;
+}
+.active {
+    box-shadow: 0px 0px 0px rgb(0 0 0 / 50%);
+    transition: all 0.3s;
+}
+
+.keys-1_25 {
+    width: $size-2;
+}
+
+.keys-1_5 {
+    width: $size-3;
+}
+
+.keys-2 {
+    width: $size-4;
+}
+
+.keys-2_25 {
+    width: $size-5;
+}
+
+.keys-6 {
+    width: $size-6;
 }
