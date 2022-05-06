@@ -10,14 +10,16 @@ if (process.env.NODE_ENV === 'production') { // Режим production, если
   mode = 'production';
 }
 
-const plugins = [   // Создаем массив плагинов
+const plugins = [   // Создаем массив плагинов и все плагины добавляем сюда, вместо module.exports
   new HtmlWebpackPlugin({
     template: './src/index.html', // Данный html будет использован как шаблон
   }),
   new MiniCssExtractPlugin({
     filename: '[name].[contenthash].css', // Формат имени файла
   }), // Добавляем в список плагинов
-  new ESLintPlugin(),
+  new ESLintPlugin({
+    fix: true, // Включил автоисправления, т.к. по умолчанию выключены и нужно вручную делать команду npx name.js --fix
+  }), //Добавил ESLint
 ];
 
 module.exports = {
