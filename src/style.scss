@@ -1,13 +1,26 @@
 @import "constants";
-div {
+
+.wrapper {
+    width: 100%;
+}
+.keyboard {
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column;
+    // flex-wrap: wrap;
     gap: 10px;
     max-width: 800px;
     // height: 100px;
     border: 2px solid black;
     padding: 10px;
+    box-sizing: border-box;
+}
+
+.key-row {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
     box-sizing: border-box;
 }
 

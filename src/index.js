@@ -1,7 +1,10 @@
 import './style.scss';
 
 const { body } = document;
+const keyboardWrapper = document.createElement('div');
+keyboardWrapper.classList.add('wrapper');
 const keyboard = document.createElement('div');
+keyboard.classList.add('keyboard');
 const keys = {
   Backquote: {
     english: '`',
@@ -291,14 +294,33 @@ document.addEventListener('keypress', (event) => {
 // const arrayKeys = [keys];
 console.log('try to create array - ', Object.entries(keys));
 const arrayKeys = Object.entries(keys);
-
+let keyboardRow = document.createElement('div');
+keyboardRow.classList.add('key-row');
 // const keyboardKeys = document.createElement('div');
 // keyboardKeys.classList.add('keys');
 for (let i = 0; i < Object.entries(keys).length; i++) {
+  if (i === 0) {
+    keyboardRow = document.createElement('div');
+    keyboardRow.classList.add('key-row');
+  } else if (i === 14) {
+    keyboardRow = document.createElement('div');
+    keyboardRow.classList.add('key-row');
+  } else if (i === 29) {
+    keyboardRow = document.createElement('div');
+    keyboardRow.classList.add('key-row');
+  } else if (i === 42) {
+    keyboardRow = document.createElement('div');
+    keyboardRow.classList.add('key-row');
+  } else if (i === 56) {
+    keyboardRow = document.createElement('div');
+    keyboardRow.classList.add('key-row');
+  }
   const keyboardKeys = document.createElement('div');
   keyboardKeys.classList.add('keys');
   keyboardKeys.innerHTML = arrayKeys[i][1].english;
-  keyboard.appendChild(keyboardKeys);
+  keyboardRow.appendChild(keyboardKeys);
+  keyboard.appendChild(keyboardRow);
 //   body.appendChild(keyboard);
 }
-body.appendChild(keyboard);
+keyboardWrapper.appendChild(keyboard);
+body.appendChild(keyboardWrapper);
