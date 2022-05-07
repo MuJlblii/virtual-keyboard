@@ -9,6 +9,9 @@ keyboardWrapper.classList.add('keyboard-wrapper');
 
 const formArea = document.createElement('form');
 const textArea = document.createElement('textarea');
+if (localStorage.getItem('textArea')) {
+  textArea.value = localStorage.getItem('textArea');
+}
 textArea.id = 'text-area';
 textArea.cols = 97;
 textArea.rows = 8;
@@ -381,6 +384,7 @@ function active(event) {
     hoveredItem.classList.toggle('active');
     if (event.type === 'mouseup') {
       textArea.value += event.srcElement.dataset.key;
+      localStorage.setItem('textArea', textArea.value);
     }
   }
   event.stopPropagation();
