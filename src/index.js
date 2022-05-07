@@ -346,6 +346,7 @@ for (let i = 0; i < Object.entries(keys).length; i++) {
     keyboardKeys.classList.add('meta');
   } else {
     keyboardKeys.classList.add('letter');
+    keyboardKeys.dataset.key = arrayKeys[i][1].english;
   }
   keyboardKeys.innerHTML = arrayKeys[i][1].english;
   keyboardRow.appendChild(keyboardKeys);
@@ -373,11 +374,14 @@ function hovered(event) {
 }
 
 function active(event) {
+  console.log('event.target', event);
   if ((event.target !== event.currentTarget) && (event.target !== keyboard)
   && (!event.target.className.includes('key-row'))) {
     const hoveredItem = event.target;
     hoveredItem.classList.toggle('active');
-    textArea.value += event.target;
+    if (event.type === 'mouseup') {
+      textArea.value += event.srcElement.dataset.key;
+    }
   }
   event.stopPropagation();
   keyboard.addEventListener('mouseup', active, false);
