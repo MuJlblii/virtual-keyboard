@@ -13,8 +13,8 @@ if (localStorage.getItem('textArea')) {
   textArea.value = localStorage.getItem('textArea');
 }
 textArea.id = 'text-area';
-textArea.cols = 97;
-textArea.rows = 8;
+textArea.cols = 78;
+textArea.rows = 6;
 // textArea.attributes[0].value = '200';
 
 const keyboard = document.createElement('div');
@@ -384,7 +384,7 @@ function hovered(event) {
 }
 
 function active(event) {
-  console.log('event.target', event);
+  // console.log('event.target', event);
   if ((event.target !== event.currentTarget) && (event.target !== keyboard)
   && (!event.target.className.includes('key-row'))) {
     const hoveredItem = event.target;
@@ -421,6 +421,21 @@ function active(event) {
       }
       textArea.setRangeText('\n', textArea.selectionStart, textArea.selectionEnd, 'end');
       localStorage.setItem('textArea', textArea.value);
+      textArea.focus();
+    } else if ((event.type === 'mouseup') && (event.target.dataset.keyCode === 'ArrowLeft')) {
+      if (textArea.selectionStart) {
+        textArea.setRangeText('', textArea.selectionStart - 1, textArea.selectionEnd - 1, 'start');
+      }
+      textArea.focus();
+    } else if ((event.type === 'mouseup') && (event.target.dataset.keyCode === 'ArrowRight')) {
+      if (textArea.selectionEnd) {
+        textArea.setRangeText('', textArea.selectionStart + 1, textArea.selectionEnd + 1, 'end');
+      }
+      textArea.focus();
+    } else if ((event.type === 'mouseup') && (event.target.dataset.keyCode === 'Space')) {
+      if (textArea.selectionEnd) {
+        textArea.setRangeText(event.srcElement.dataset.key, textArea.selectionStart, textArea.selectionEnd, 'end');
+      }
       textArea.focus();
     } else {
       textArea.focus();
