@@ -302,24 +302,27 @@ const keys = {
 
 };
 
-document.addEventListener('keypress', (event) => {
-  console.log(event);
-  console.log(keys.length);
-  //   keys.event.code: (event.key)};
+function keyUp(event) {
   const keyCode = event.code;
-  if (!keys[keyCode].russian) {
-    keys[keyCode].russian = event.key;
-  } else {
-    console.warn('NEW LETTER');
-  }
-  //   keyCode.key = event.key;
-  //   keys.push(keyCode);
-  // charCode: event.cha
-  //   );
-  console.log(keys);
-//   const b = event.altKey;
-//   return b;
-});
+  console.log('event', event);
+  const hoveredItem = document.querySelector(`div[data-key-code="${keyCode}"]`);
+  hoveredItem.classList.remove('active');
+  // hoveredItem.addEventListener('keyup',keyUp);
+}
+
+function keyDown(event) {
+  const keyCode = event.code;
+  // console.log('keyCode', keyCode);
+  const hoveredItem = document.querySelector(`div[data-key-code="${keyCode}"]`);
+  hoveredItem.classList.add('active');
+  // const textArea = document.querySelector('#text-area');
+  textArea.focus();
+  // textArea.value += event.key;
+  document.addEventListener('keyup', keyUp, false);
+  localStorage.setItem('textArea', textArea.value);
+}
+
+document.addEventListener('keydown', keyDown, false);
 
 // console.log('try to create array - ', Object.entries(keys));
 const arrayKeys = Object.entries(keys);
@@ -349,8 +352,12 @@ for (let i = 0; i < Object.entries(keys).length; i++) {
     keyboardKeys.classList.add('meta');
   } else {
     keyboardKeys.classList.add('letter');
-    keyboardKeys.dataset.key = arrayKeys[i][1].english;
   }
+
+  keyboardKeys.dataset.key = arrayKeys[i][1].english;
+  console.log('arrayKeys[i]', arrayKeys[i][0]);
+  const keyCode = arrayKeys[i][0];
+  keyboardKeys.dataset.keyCode = keyCode;
   keyboardKeys.innerHTML = arrayKeys[i][1].english;
   keyboardRow.appendChild(keyboardKeys);
   keyboard.appendChild(keyboardRow);
@@ -382,9 +389,14 @@ function active(event) {
   && (!event.target.className.includes('key-row'))) {
     const hoveredItem = event.target;
     hoveredItem.classList.toggle('active');
-    if (event.type === 'mouseup') {
-      textArea.value += event.srcElement.dataset.key;
+    if ((event.type === 'mouseup') && (!event.target.className.includes('meta'))) {
+      if (!textArea.focus()) {
+        textArea.focus();
+      }
+      textArea.setRangeText(event.srcElement.dataset.key, textArea.selectionStart, textArea.selectionEnd, 'end');
+      // textArea.value += event.srcElement.dataset.key;
       localStorage.setItem('textArea', textArea.value);
+      textArea.focus();
     }
   }
   event.stopPropagation();
