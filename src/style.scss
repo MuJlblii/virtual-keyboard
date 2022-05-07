@@ -3,9 +3,22 @@
 .wrapper {
     width: 100%;
 }
+
+.keyboard-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // margin-left: auto;
+    // margin-right: auto;
+}
+
+textarea {
+    
+}
+
 .keyboard {
-    margin-left: auto;
-    margin-right: auto;
+    // margin-left: auto;
+    // margin-right: auto;
     display: flex;
     flex-direction: column;
     // flex-wrap: wrap;

@@ -1,8 +1,19 @@
 import './style.scss';
 
 const { body } = document;
+const wrapper = document.createElement('div');
+wrapper.classList.add('wrapper');
+
 const keyboardWrapper = document.createElement('div');
-keyboardWrapper.classList.add('wrapper');
+keyboardWrapper.classList.add('keyboard-wrapper');
+
+const formArea = document.createElement('form');
+const textArea = document.createElement('textarea');
+textArea.id = 'text-area';
+textArea.cols = 97;
+textArea.rows = 8;
+// textArea.attributes[0].value = '200';
+
 const keyboard = document.createElement('div');
 keyboard.classList.add('keyboard');
 const keys = {
@@ -307,7 +318,7 @@ document.addEventListener('keypress', (event) => {
 //   return b;
 });
 
-console.log('try to create array - ', Object.entries(keys));
+// console.log('try to create array - ', Object.entries(keys));
 const arrayKeys = Object.entries(keys);
 let keyboardRow = document.createElement('div');
 keyboardRow.classList.add('key-row');
@@ -341,8 +352,12 @@ for (let i = 0; i < Object.entries(keys).length; i++) {
   keyboard.appendChild(keyboardRow);
 //   body.appendChild(keyboard);
 }
+
+formArea.appendChild(textArea);
+keyboardWrapper.appendChild(formArea);
 keyboardWrapper.appendChild(keyboard);
-body.appendChild(keyboardWrapper);
+wrapper.appendChild(keyboardWrapper);
+body.appendChild(wrapper);
 
 function hovered(event) {
   // console.log('target -', event.target);
@@ -362,6 +377,7 @@ function active(event) {
   && (!event.target.className.includes('key-row'))) {
     const hoveredItem = event.target;
     hoveredItem.classList.toggle('active');
+    textArea.value += event.target;
   }
   event.stopPropagation();
   keyboard.addEventListener('mouseup', active, false);
