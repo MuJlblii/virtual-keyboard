@@ -304,7 +304,7 @@ const keys = {
 
 function keyUp(event) {
   const keyCode = event.code;
-  console.log('event', event);
+  // console.log('event - keyUp', event);
   const hoveredItem = document.querySelector(`div[data-key-code="${keyCode}"]`);
   hoveredItem.classList.remove('active');
   // hoveredItem.addEventListener('keyup',keyUp);
@@ -312,9 +312,13 @@ function keyUp(event) {
 
 function keyDown(event) {
   const keyCode = event.code;
-  // console.log('keyCode', keyCode);
+  console.log('event - keyDown', event);
   const hoveredItem = document.querySelector(`div[data-key-code="${keyCode}"]`);
   hoveredItem.classList.add('active');
+  if (event.key === 'Tab') {
+    event.preventDefault();
+    textArea.setRangeText('    ', textArea.selectionStart, textArea.selectionEnd, 'end');
+  }
   // const textArea = document.querySelector('#text-area');
   textArea.focus();
   // textArea.value += event.key;
