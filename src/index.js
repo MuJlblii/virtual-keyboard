@@ -410,9 +410,11 @@ function active(event) {
         textArea.setRangeText('', textArea.selectionStart + 1, textArea.selectionEnd + 1, 'end');
       }
     } else if ((event.type === 'mouseup') && (event.target.dataset.keyCode === 'Space')) {
-      if (textArea.selectionEnd) {
-        textArea.setRangeText(event.srcElement.dataset.key, textArea.selectionStart, textArea.selectionEnd, 'end');
-      }
+      // if (textArea.selectionEnd) {
+      textArea.setRangeText(event.srcElement.dataset.key, textArea.selectionStart, textArea.selectionEnd, 'end');
+      // }
+    } else if ((event.type === 'mouseup') && (event.target.dataset.keyCode === 'Tab')) {
+      textArea.setRangeText('    ', textArea.selectionStart, textArea.selectionEnd, 'end');
     }
   }
   localStorage.setItem('textArea', textArea.value);
