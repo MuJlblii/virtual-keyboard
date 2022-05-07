@@ -390,57 +390,33 @@ function active(event) {
     const hoveredItem = event.target;
     hoveredItem.classList.toggle('active');
     if ((event.type === 'mouseup') && (!event.target.className.includes('meta'))) {
-      if (!textArea.focus()) {
-        textArea.focus();
-      }
       textArea.setRangeText(event.srcElement.dataset.key, textArea.selectionStart, textArea.selectionEnd, 'end');
-      // textArea.value += event.srcElement.dataset.key;
-      localStorage.setItem('textArea', textArea.value);
-      textArea.focus();
     } else if ((event.type === 'mouseup') && (event.target.dataset.keyCode === 'Backspace')) {
       if (textArea.selectionStart) {
-        if (!textArea.focus()) {
-          textArea.focus();
-        }
         textArea.setRangeText('', textArea.selectionStart - 1, textArea.selectionEnd, 'end');
-        localStorage.setItem('textArea', textArea.value);
-        textArea.focus();
       }
     } else if ((event.type === 'mouseup') && (event.target.dataset.keyCode === 'Delete')) {
       if (textArea.selectionEnd + 1) {
-        if (!textArea.focus()) {
-          textArea.focus();
-        }
         textArea.setRangeText('', textArea.selectionStart, textArea.selectionEnd + 1, 'end');
-        localStorage.setItem('textArea', textArea.value);
-        textArea.focus();
       }
     } else if ((event.type === 'mouseup') && (event.target.dataset.keyCode === 'Enter')) {
-      if (!textArea.focus()) {
-        textArea.focus();
-      }
       textArea.setRangeText('\n', textArea.selectionStart, textArea.selectionEnd, 'end');
-      localStorage.setItem('textArea', textArea.value);
-      textArea.focus();
     } else if ((event.type === 'mouseup') && (event.target.dataset.keyCode === 'ArrowLeft')) {
       if (textArea.selectionStart) {
         textArea.setRangeText('', textArea.selectionStart - 1, textArea.selectionEnd - 1, 'start');
       }
-      textArea.focus();
     } else if ((event.type === 'mouseup') && (event.target.dataset.keyCode === 'ArrowRight')) {
       if (textArea.selectionEnd) {
         textArea.setRangeText('', textArea.selectionStart + 1, textArea.selectionEnd + 1, 'end');
       }
-      textArea.focus();
     } else if ((event.type === 'mouseup') && (event.target.dataset.keyCode === 'Space')) {
       if (textArea.selectionEnd) {
         textArea.setRangeText(event.srcElement.dataset.key, textArea.selectionStart, textArea.selectionEnd, 'end');
       }
-      textArea.focus();
-    } else {
-      textArea.focus();
     }
   }
+  localStorage.setItem('textArea', textArea.value);
+  textArea.focus();
   event.stopPropagation();
   keyboard.addEventListener('mouseup', active, false);
 }
