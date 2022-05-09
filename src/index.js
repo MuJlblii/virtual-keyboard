@@ -26,55 +26,81 @@ const keys = {
     english: '`',
     russian: 'ё',
     style: 'meta',
+    shiftEn: '~',
+    shiftRu: 'Ё',
   },
   Digit1: {
     english: '1',
     russian: '1',
+    shiftEn: '!',
+    shiftRu: '!',
   },
   Digit2: {
     english: '2',
     russian: '2',
+    shiftEn: '@',
+    shiftRu: '"',
   },
   Digit3: {
     english: '3',
     russian: '3',
+    shiftEn: '#',
+    shiftRu: '№',
   },
   Digit4: {
     english: '4',
     russian: '4',
+    shiftEn: '$',
+    shiftRu: ';',
   },
   Digit5: {
     english: '5',
     russian: '5',
+    shiftEn: '%',
+    shiftRu: '%',
   },
   Digit6: {
     english: '6',
     russian: '6',
+    shiftEn: '^',
+    shiftRu: ':',
   },
   Digit7: {
     english: '7',
     russian: '7',
+    shiftEn: '&',
+    shiftRu: '?',
   },
   Digit8: {
     english: '8',
     russian: '8',
+    shiftEn: '*',
+    shiftRu: '*',
   },
   Digit9: {
     english: '9',
     russian: '9',
+    shiftEn: '(',
+    shiftRu: '(',
   },
   Digit0: {
     english: '0',
     russian: '0',
+    shiftEn: ')',
+    shiftRu: ')',
   },
 
   Minus: {
     english: '-',
     russian: '-',
+    shiftEn: '_',
+    shiftRu: '_',
   },
   Equal: {
     english: '=',
     russian: '=',
+    shiftEn: '+',
+    shiftRu: '+',
   },
   Backspace: {
     english: 'Backspace',
@@ -89,54 +115,80 @@ const keys = {
   KeyQ: {
     english: 'q',
     russian: 'й',
+    shiftEn: 'Q',
+    shiftRu: 'Й',
   },
   KeyW: {
     english: 'w',
     russian: 'ц',
+    shiftEn: 'W',
+    shiftRu: 'Ц',
   },
   KeyE: {
     english: 'e',
     russian: 'у',
+    shiftEn: 'E',
+    shiftRu: 'У',
   },
   KeyR: {
     english: 'r',
     russian: 'к',
+    shiftEn: 'R',
+    shiftRu: 'К',
   },
   KeyT: {
     english: 't',
     russian: 'е',
+    shiftEn: 'T',
+    shiftRu: 'Е',
   },
   KeyY: {
     english: 'y',
     russian: 'н',
+    shiftEn: 'Y',
+    shiftRu: 'Н',
   },
   KeyU: {
     english: 'u',
     russian: 'г',
+    shiftEn: 'U',
+    shiftRu: 'Г',
   },
   KeyI: {
     english: 'i',
     russian: 'ш',
+    shiftEn: 'I',
+    shiftRu: 'Ш',
   },
   KeyO: {
     english: 'o',
     russian: 'щ',
+    shiftEn: 'O',
+    shiftRu: 'Щ',
   },
   KeyP: {
     english: 'p',
     russian: 'з',
+    shiftEn: 'P',
+    shiftRu: 'З',
   },
   BracketLeft: {
     english: '[',
     russian: 'х',
+    shiftEn: '{',
+    shiftRu: 'Х',
   },
   BracketRight: {
     english: ']',
     russian: 'ъ',
+    shiftEn: '}',
+    shiftRu: 'Ъ',
   },
   Backslash: {
     english: '\\',
     russian: '\\',
+    shiftEn: '|',
+    shiftRu: '/',
   },
   Delete: {
     english: 'DEL',
@@ -151,46 +203,68 @@ const keys = {
   KeyA: {
     english: 'a',
     russian: 'ф',
+    shiftEn: 'A',
+    shiftRu: 'Ф',
   },
   KeyS: {
     english: 's',
     russian: 'ы',
+    shiftEn: 'S',
+    shiftRu: 'Ы',
   },
   KeyD: {
     english: 'd',
     russian: 'в',
+    shiftEn: 'D',
+    shiftRu: 'В',
   },
   KeyF: {
     english: 'f',
     russian: 'а',
+    shiftEn: 'F',
+    shiftRu: 'А',
   },
   KeyG: {
     english: 'g',
     russian: 'п',
+    shiftEn: 'G',
+    shiftRu: 'П',
   },
   KeyH: {
     english: 'h',
     russian: 'р',
+    shiftEn: 'H',
+    shiftRu: 'Р',
   },
   KeyJ: {
     english: 'j',
     russian: 'о',
+    shiftEn: 'J',
+    shiftRu: 'О',
   },
   KeyK: {
     english: 'k',
     russian: 'л',
+    shiftEn: 'K',
+    shiftRu: 'Л',
   },
   KeyL: {
     english: 'l',
     russian: 'д',
+    shiftEn: 'L',
+    shiftRu: 'Д',
   },
   Semicolon: {
     english: ';',
     russian: 'ж',
+    shiftEn: ':',
+    shiftRu: 'Ж',
   },
   Quote: {
     english: "'",
     russian: 'э',
+    shiftEn: '"',
+    shiftRu: 'Э',
   },
   Enter: {
     english: 'ENTER',
@@ -205,46 +279,68 @@ const keys = {
   IntlBackslash: {
     english: '\\',
     russian: '\\',
+    shiftEn: '|',
+    shiftRu: '/',
   },
   KeyZ: {
     english: 'z',
     russian: 'я',
+    shiftEn: 'Z',
+    shiftRu: 'Я',
   },
   KeyX: {
     english: 'x',
     russian: 'ч',
+    shiftEn: 'X',
+    shiftRu: 'Ч',
   },
   KeyC: {
     english: 'c',
     russian: 'с',
+    shiftEn: 'C',
+    shiftRu: 'С',
   },
   KeyV: {
     english: 'v',
     russian: 'м',
+    shiftEn: 'V',
+    shiftRu: 'М',
   },
   KeyB: {
     english: 'b',
     russian: 'и',
+    shiftEn: 'B',
+    shiftRu: 'И',
   },
   KeyN: {
     english: 'n',
     russian: 'т',
+    shiftEn: 'N',
+    shiftRu: 'Т',
   },
   KeyM: {
     english: 'm',
     russian: 'ь',
+    shiftEn: 'M',
+    shiftRu: 'Ь',
   },
   Comma: {
     english: ',',
     russian: 'б',
+    shiftEn: '<',
+    shiftRu: 'Б',
   },
   Period: {
     english: '.',
     russian: 'ю',
+    shiftEn: '>',
+    shiftRu: 'Ю',
   },
   Slash: {
     english: '/',
     russian: '.',
+    shiftEn: '?',
+    shiftRu: ',',
   },
   ArrowUp: {
     english: '▲',
@@ -306,7 +402,7 @@ const keys = {
 
 const arrayKeys = Object.entries(keys);
 
-function createKeyboard() {
+function createKeyboard(shiftPr) {
   const language = localStorage.getItem('language') ? localStorage.getItem('language') : 'english';
   localStorage.setItem('language', language);
   // if (localStorage.getItem('language')) {
@@ -341,12 +437,32 @@ function createKeyboard() {
     } else {
       keyboardKeys.classList.add('letter');
     }
-
-    keyboardKeys.dataset.key = arrayKeys[i][1][language];
+    if (shiftPr === 'ShitPr') {
+      if (language === 'russian') {
+        keyboardKeys.dataset.key = arrayKeys[i][1].shiftRu
+          ? arrayKeys[i][1].shiftRu : arrayKeys[i][1][language];
+      } else {
+        keyboardKeys.dataset.key = arrayKeys[i][1].shiftEn
+          ? arrayKeys[i][1].shiftEn : arrayKeys[i][1][language];
+      }
+    } else {
+      keyboardKeys.dataset.key = arrayKeys[i][1][language];
+    }
     // console.log('arrayKeys[i]', arrayKeys[i][0]);
     const keyCode = arrayKeys[i][0];
     keyboardKeys.dataset.keyCode = keyCode;
-    keyboardKeys.innerHTML = arrayKeys[i][1][language];
+
+    if (shiftPr === 'ShitPr') {
+      if (language === 'russian') {
+        keyboardKeys.innerHTML = arrayKeys[i][1].shiftRu
+          ? arrayKeys[i][1].shiftRu : arrayKeys[i][1][language];
+      } else {
+        keyboardKeys.innerHTML = arrayKeys[i][1].shiftEn
+          ? arrayKeys[i][1].shiftEn : arrayKeys[i][1][language];
+      }
+    } else {
+      keyboardKeys.innerHTML = arrayKeys[i][1][language];
+    }
     keyboardRow.appendChild(keyboardKeys);
 
     keyboard.appendChild(keyboardRow);
@@ -484,8 +600,38 @@ function changeLanguage(event) {
     keyboardWrapper.appendChild(newKeyboard);
   }
 }
+
+function shiftPress(event) {
+  if (event.type === 'keydown') {
+    if (event.key === 'Shift' && event.repeat === false) {
+      keyboardWrapper.removeChild(keyboardWrapper.lastChild);
+      keyboardPlug.removeEventListener('mouseover', hovered, false);
+      keyboardPlug.removeEventListener('mousedown', active, false);
+      // const languages = localStorage.getItem('language') === 'english' ? 'russian' : 'english';
+      // localStorage.setItem('language', languages);
+      const newKeyboard = createKeyboard('ShitPr');
+      keyboardWrapper.appendChild(newKeyboard);
+      const hoveredItem = document.querySelector(`div[data-key-code="${event.code}"]`);
+      hoveredItem.classList.add('active');
+      // console.log('event.code --- shift ----', event.code);
+    }
+    document.addEventListener('keyup', shiftPress, false);
+  } else if (event.type === 'keyup' && event.key === 'Shift') {
+    keyboardWrapper.removeChild(keyboardWrapper.lastChild);
+    keyboardPlug.removeEventListener('mouseover', hovered, false);
+    keyboardPlug.removeEventListener('mousedown', active, false);
+    // const languages = localStorage.getItem('language') === 'english' ? 'russian' : 'english';
+    // localStorage.setItem('language', languages);
+    const newKeyboard = createKeyboard();
+    keyboardWrapper.appendChild(newKeyboard);
+  }
+  // event.stopPropagation();
+  document.addEventListener('keyup', shiftPress, false);
+}
+
 document.addEventListener('keydown', keyDown, false);
 document.addEventListener('keyup', changeLanguage, false);
+document.addEventListener('keydown', shiftPress, false);
 
 // const keyboardPlug = document.querySelector('keyboard');
 // const keyboardPlug = keyboardWrapper.getElementsByClassName('keyboard')[0];
