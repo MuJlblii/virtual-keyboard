@@ -495,7 +495,7 @@ function createKeyboard(shiftPr) {
     } else {
       keyboardKeys.classList.add('letter');
     }
-    if (shiftPr === 'ShitPr') {
+    if (shiftPr === 'ShiftPr') {
       if (language === 'russian') {
         keyboardKeys.dataset.key = arrayKeys[i][1].shiftRu
           ? arrayKeys[i][1].shiftRu : arrayKeys[i][1][language];
@@ -521,11 +521,10 @@ function createKeyboard(shiftPr) {
     }
 
     if (localStorage.getItem('capsLock') === '1' && keyboardKeys.dataset.keyCode === 'CapsLock') {
-      // console.log('hello');
       keyboardKeys.classList.add('active');
     }
 
-    if (shiftPr === 'ShitPr') {
+    if (shiftPr === 'ShiftPr') {
       if (language === 'russian') {
         keyboardKeys.innerHTML = arrayKeys[i][1].shiftRu
           ? arrayKeys[i][1].shiftRu : arrayKeys[i][1][language];
@@ -565,7 +564,6 @@ function keyUp(event) {
   const hoveredItem = document.querySelector(`div[data-key-code="${keyCode}"]`);
   hoveredItem.classList.remove('active');
   if (localStorage.getItem('capsLock') === '1' && hoveredItem.dataset.keyCode === 'CapsLock') {
-    // console.log('hello');
     hoveredItem.classList.add('active');
   }
 }
@@ -573,7 +571,7 @@ function keyUp(event) {
 function keyDown(event) {
   event.preventDefault();
   const keyCode = event.code;
-  console.log('event - keyDown', event);
+  // console.log('event - keyDown', event);
   const hoveredItem = document.querySelector(`div[data-key-code="${keyCode}"]`);
   hoveredItem.classList.add('active');
   if (!event.metaKey) {
@@ -667,7 +665,7 @@ function active(event) {
       keyboardWrapper.removeChild(keyboardWrapper.lastChild);
       // console.log('event.target -- mouse Shift --', event.target.dataset.keyCode);
       localStorage.setItem('mouseShift', event.target.dataset.keyCode);
-      const newKeyboard = createKeyboard('ShitPr');
+      const newKeyboard = createKeyboard('ShiftPr');
       keyboardWrapper.appendChild(newKeyboard);
     } else if (event.type === 'mouseup' && (event.target.dataset.keyCode === 'ShiftRight' || event.target.dataset.keyCode === 'ShiftLeft')) {
       keyboardWrapper.removeChild(keyboardWrapper.lastChild);
@@ -693,7 +691,6 @@ function active(event) {
 
 function changeLanguage(event) {
   if ((event.ctrlKey) && (event.key === 'Alt')) {
-    console.log('CHANGE LANGUAGE changeLanguage');
     keyboardWrapper.removeChild(keyboardWrapper.lastChild);
     keyboardPlug.removeEventListener('mouseover', hovered, false);
     keyboardPlug.removeEventListener('mousedown', active, false);
@@ -712,7 +709,7 @@ function shiftPress(event) {
       keyboardPlug.removeEventListener('mousedown', active, false);
       // const languages = localStorage.getItem('language') === 'english' ? 'russian' : 'english';
       // localStorage.setItem('language', languages);
-      const newKeyboard = createKeyboard('ShitPr');
+      const newKeyboard = createKeyboard('ShiftPr');
       keyboardWrapper.appendChild(newKeyboard);
       const hoveredItem = document.querySelector(`div[data-key-code="${event.code}"]`);
       hoveredItem.classList.add('active');
