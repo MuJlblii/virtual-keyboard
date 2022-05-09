@@ -10,6 +10,9 @@ keyboardWrapper.classList.add('keyboard-wrapper');
 const formArea = document.createElement('form');
 const textArea = document.createElement('textarea');
 
+const textMessage = document.createElement('p');
+textMessage.innerText = 'Клавиатура создана в операционной системе Windows\nДля переключения языка комбинация: левыe ctrl + alt';
+
 if (localStorage.getItem('textArea')) {
   textArea.value = localStorage.getItem('textArea');
 }
@@ -357,6 +360,7 @@ formArea.appendChild(textArea);
 keyboardWrapper.appendChild(formArea);
 keyboardWrapper.appendChild(createKeyboard());
 wrapper.appendChild(keyboardWrapper);
+wrapper.appendChild(textMessage);
 body.appendChild(wrapper);
 
 const keyboardPlug = keyboardWrapper.getElementsByClassName('keyboard')[0];
@@ -458,6 +462,8 @@ function active(event) {
       // }
     } else if ((event.type === 'mouseup') && (event.target.dataset.keyCode === 'Tab')) {
       textArea.setRangeText('    ', textArea.selectionStart, textArea.selectionEnd, 'end');
+    } else if ((event.type === 'mouseup') && ((event.target.dataset.keyCode === 'ArrowUp') || (event.target.dataset.keyCode === 'ArrowDown'))) {
+      textArea.setRangeText(event.srcElement.dataset.key, textArea.selectionStart, textArea.selectionEnd, 'end');
     }
   }
   localStorage.setItem('textArea', textArea.value);
