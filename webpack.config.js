@@ -30,11 +30,14 @@ module.exports = {
   // в который импортируются все остальные
 
   output: {
-    path: path.resolve(__dirname, 'dist'), // Директория, в которой будет
+    path: path.resolve(__dirname, 'build'), // Директория, в которой будет
     // размещаться итоговый бандл, папка dist в корне приложения
     assetModuleFilename: 'assets/[hash][ext][query]', // Все ассеты будут
     // складываться в dist/assets
-    clean: true, // Очищает директорию dist перед обновлением бандла
+    clean : {
+      keep: /\.git/,
+    },
+    // clean: true, // Очищает директорию dist перед обновлением бандла
     // Свойство стало доступно с версии 5.20.0, до этого использовался
     // CleanWebpackPlugin
   },
