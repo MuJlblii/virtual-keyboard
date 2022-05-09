@@ -521,7 +521,7 @@ function createKeyboard(shiftPr) {
     }
 
     if (localStorage.getItem('capsLock') === '1' && keyboardKeys.dataset.keyCode === 'CapsLock') {
-      console.log('hello');
+      // console.log('hello');
       keyboardKeys.classList.add('active');
     }
 
@@ -564,6 +564,10 @@ function keyUp(event) {
   const keyCode = event.code;
   const hoveredItem = document.querySelector(`div[data-key-code="${keyCode}"]`);
   hoveredItem.classList.remove('active');
+  if (localStorage.getItem('capsLock') === '1' && hoveredItem.dataset.keyCode === 'CapsLock') {
+    // console.log('hello');
+    hoveredItem.classList.add('active');
+  }
 }
 
 function keyDown(event) {
@@ -730,23 +734,9 @@ function capsPress(event) {
     } else {
       localStorage.setItem('capsLock', '1');
     }
-    // localStorage.getItem('capsLock') === 1 ? localStorage.setItem('capsLock', 0) :
-    // localStorage.setItem('capsLock', 1);
-    // if (localStorage.getItem('capsLock') === 1) {
-    //   const newKeyboard = createKeyboard('CapsLock');
-    // } else {
-    //   const newKeyboard = createKeyboard();
-    // }
-
     const newKeyboard = createKeyboard(localStorage.getItem('capsLock') === '1' ? 'CapsLock' : '');
     keyboardWrapper.appendChild(newKeyboard);
-    // const hoveredItem = document.querySelector(`div[data-key-code="${event.code}"]`);
-    // hoveredItem.classList.add('active');
   }
-  const hoveredItem = document.querySelector(`div[data-key-code="${event.code}"]`);
-  hoveredItem.classList.add('active');
-  // event.stopPropagation();
-  // document.addEventListener('keyup', shiftPress, false);
 }
 
 document.addEventListener('keydown', keyDown, false);
