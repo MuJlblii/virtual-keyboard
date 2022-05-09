@@ -382,8 +382,8 @@ function keyDown(event) {
 }
 
 function hovered(event) {
-  console.log('target -', event.target);
-  console.log('currentTarget -', event.currentTarget);
+  // console.log('target -', event.target);
+  // console.log('currentTarget -', event.currentTarget);
   if (event.target.className.includes('keys')) {
     const hoveredItem = event.target;
     // console.log('hovered item -', hoveredItem);
@@ -395,9 +395,7 @@ function hovered(event) {
 
 function active(event) {
   // console.log('event.target', event);
-  const keyboard = document.querySelector('keyboard');
-  if ((event.target !== event.currentTarget) && (event.target !== keyboard)
-  && (!event.target.className.includes('key-row'))) {
+  if (event.target.className.includes('keys')) {
     const hoveredItem = event.target;
     hoveredItem.classList.toggle('active');
     if ((event.type === 'mouseup') && (!event.target.className.includes('meta'))) {
