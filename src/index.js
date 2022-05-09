@@ -452,6 +452,10 @@ function createKeyboard(shiftPr) {
     const keyCode = arrayKeys[i][0];
     keyboardKeys.dataset.keyCode = keyCode;
 
+    if (localStorage.getItem('mouseShift') === keyboardKeys.dataset.keyCode) {
+      keyboardKeys.classList.toggle('active');
+    }
+
     if (shiftPr === 'ShitPr') {
       if (language === 'russian') {
         keyboardKeys.innerHTML = arrayKeys[i][1].shiftRu
@@ -582,20 +586,13 @@ function active(event) {
       textArea.setRangeText(event.srcElement.dataset.key, textArea.selectionStart, textArea.selectionEnd, 'end');
     } else if (event.type === 'mousedown' && (event.target.dataset.keyCode === 'ShiftRight' || event.target.dataset.keyCode === 'ShiftLeft')) {
       keyboardWrapper.removeChild(keyboardWrapper.lastChild);
-      // keyboardPlug.removeEventListener('mouseover', hovered, false);
-      // keyboardPlug.removeEventListener('mousedown', active, false);
-      // const languages = localStorage.getItem('language') === 'english' ? 'russian' : 'english';
-      // localStorage.setItem('language', languages);
+      console.log('event.target -- mouse Shift --', event.target.dataset.keyCode);
+      localStorage.setItem('mouseShift', event.target.dataset.keyCode);
       const newKeyboard = createKeyboard('ShitPr');
       keyboardWrapper.appendChild(newKeyboard);
-      const hoveredShift = event.target;
-      hoveredShift.classList.add('active');
     } else if (event.type === 'mouseup' && (event.target.dataset.keyCode === 'ShiftRight' || event.target.dataset.keyCode === 'ShiftLeft')) {
       keyboardWrapper.removeChild(keyboardWrapper.lastChild);
-      // keyboardPlug.removeEventListener('mouseover', hovered, false);
-      // keyboardPlug.removeEventListener('mousedown', active, false);
-      // const languages = localStorage.getItem('language') === 'english' ? 'russian' : 'english';
-      // localStorage.setItem('language', languages);
+      localStorage.removeItem('mouseShift');
       const newKeyboard = createKeyboard();
       keyboardWrapper.appendChild(newKeyboard);
     }
