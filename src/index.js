@@ -9,6 +9,7 @@ keyboardWrapper.classList.add('keyboard-wrapper');
 
 const formArea = document.createElement('form');
 const textArea = document.createElement('textarea');
+
 if (localStorage.getItem('textArea')) {
   textArea.value = localStorage.getItem('textArea');
 }
@@ -17,8 +18,6 @@ textArea.cols = 78;
 textArea.rows = 6;
 // textArea.attributes[0].value = '200';
 
-const keyboard = document.createElement('div');
-keyboard.classList.add('keyboard');
 const keys = {
   Backquote: {
     english: '`',
@@ -302,12 +301,65 @@ const keys = {
 
 };
 
+const arrayKeys = Object.entries(keys);
+
+function createKeyboard(language) {
+  const keyboard = document.createElement('div');
+  keyboard.classList.add('keyboard');
+  let keyboardRow = document.createElement('div');
+  keyboardRow.classList.add('key-row');
+  for (let i = 0; i < Object.entries(keys).length; i++) {
+    if (i === 0) {
+      keyboardRow = document.createElement('div');
+      keyboardRow.classList.add('key-row');
+    } else if (i === 14) {
+      keyboardRow = document.createElement('div');
+      keyboardRow.classList.add('key-row');
+    } else if (i === 29) {
+      keyboardRow = document.createElement('div');
+      keyboardRow.classList.add('key-row');
+    } else if (i === 42) {
+      keyboardRow = document.createElement('div');
+      keyboardRow.classList.add('key-row');
+    } else if (i === 56) {
+      keyboardRow = document.createElement('div');
+      keyboardRow.classList.add('key-row');
+    }
+    const keyboardKeys = document.createElement('div');
+    keyboardKeys.classList.add('keys');
+    if (arrayKeys[i][1].style) {
+      keyboardKeys.classList.add(arrayKeys[i][1].style);
+      keyboardKeys.classList.add('meta');
+    } else {
+      keyboardKeys.classList.add('letter');
+    }
+
+    keyboardKeys.dataset.key = arrayKeys[i][1][language];
+    // console.log('arrayKeys[i]', arrayKeys[i][0]);
+    const keyCode = arrayKeys[i][0];
+    keyboardKeys.dataset.keyCode = keyCode;
+    keyboardKeys.innerHTML = arrayKeys[i][1][language];
+    keyboardRow.appendChild(keyboardKeys);
+
+    keyboard.appendChild(keyboardRow);
+    //   body.appendChild(keyboard);
+  }
+
+  return keyboard;
+}
+
+formArea.appendChild(textArea);
+keyboardWrapper.appendChild(formArea);
+keyboardWrapper.appendChild(createKeyboard('russian'));
+wrapper.appendChild(keyboardWrapper);
+body.appendChild(wrapper);
+
+const keyboardPlug = keyboardWrapper.getElementsByClassName('keyboard')[0];
+
 function keyUp(event) {
   const keyCode = event.code;
-  // console.log('event - keyUp', event);
   const hoveredItem = document.querySelector(`div[data-key-code="${keyCode}"]`);
   hoveredItem.classList.remove('active');
-  // hoveredItem.addEventListener('keyup',keyUp);
 }
 
 function keyDown(event) {
@@ -319,76 +371,26 @@ function keyDown(event) {
     event.preventDefault();
     textArea.setRangeText('    ', textArea.selectionStart, textArea.selectionEnd, 'end');
   }
-  // const textArea = document.querySelector('#text-area');
   textArea.focus();
-  // textArea.value += event.key;
   document.addEventListener('keyup', keyUp, false);
   localStorage.setItem('textArea', textArea.value);
 }
 
-document.addEventListener('keydown', keyDown, false);
-
-// console.log('try to create array - ', Object.entries(keys));
-const arrayKeys = Object.entries(keys);
-let keyboardRow = document.createElement('div');
-keyboardRow.classList.add('key-row');
-for (let i = 0; i < Object.entries(keys).length; i++) {
-  if (i === 0) {
-    keyboardRow = document.createElement('div');
-    keyboardRow.classList.add('key-row');
-  } else if (i === 14) {
-    keyboardRow = document.createElement('div');
-    keyboardRow.classList.add('key-row');
-  } else if (i === 29) {
-    keyboardRow = document.createElement('div');
-    keyboardRow.classList.add('key-row');
-  } else if (i === 42) {
-    keyboardRow = document.createElement('div');
-    keyboardRow.classList.add('key-row');
-  } else if (i === 56) {
-    keyboardRow = document.createElement('div');
-    keyboardRow.classList.add('key-row');
-  }
-  const keyboardKeys = document.createElement('div');
-  keyboardKeys.classList.add('keys');
-  if (arrayKeys[i][1].style) {
-    keyboardKeys.classList.add(arrayKeys[i][1].style);
-    keyboardKeys.classList.add('meta');
-  } else {
-    keyboardKeys.classList.add('letter');
-  }
-
-  keyboardKeys.dataset.key = arrayKeys[i][1].english;
-  console.log('arrayKeys[i]', arrayKeys[i][0]);
-  const keyCode = arrayKeys[i][0];
-  keyboardKeys.dataset.keyCode = keyCode;
-  keyboardKeys.innerHTML = arrayKeys[i][1].english;
-  keyboardRow.appendChild(keyboardKeys);
-  keyboard.appendChild(keyboardRow);
-//   body.appendChild(keyboard);
-}
-
-formArea.appendChild(textArea);
-keyboardWrapper.appendChild(formArea);
-keyboardWrapper.appendChild(keyboard);
-wrapper.appendChild(keyboardWrapper);
-body.appendChild(wrapper);
-
 function hovered(event) {
-  // console.log('target -', event.target);
-  // console.log('currentTarget -', event.currentTarget);
-  if ((event.target !== event.currentTarget) && (event.target !== keyboard)
-  && (!event.target.className.includes('key-row'))) {
+  console.log('target -', event.target);
+  console.log('currentTarget -', event.currentTarget);
+  if (event.target.className.includes('keys')) {
     const hoveredItem = event.target;
     // console.log('hovered item -', hoveredItem);
     hoveredItem.classList.toggle('hovered');
   }
   event.stopPropagation();
-  keyboard.addEventListener('mouseout', hovered, false);
+  keyboardWrapper.addEventListener('mouseout', hovered, false);
 }
 
 function active(event) {
   // console.log('event.target', event);
+  const keyboard = document.querySelector('keyboard');
   if ((event.target !== event.currentTarget) && (event.target !== keyboard)
   && (!event.target.className.includes('key-row'))) {
     const hoveredItem = event.target;
@@ -424,8 +426,23 @@ function active(event) {
   localStorage.setItem('textArea', textArea.value);
   textArea.focus();
   event.stopPropagation();
-  keyboard.addEventListener('mouseup', active, false);
+  keyboardWrapper.addEventListener('mouseup', active, false);
 }
 
-keyboard.addEventListener('mouseover', hovered, false);
-keyboard.addEventListener('mousedown', active, false);
+function changeLanguage(event) {
+  if ((event.ctrlKey) && (event.key === 'Alt')) {
+    console.log('CHANGE LANGUAGE changeLanguage');
+    keyboardWrapper.removeChild(keyboardWrapper.lastChild);
+    keyboardPlug.removeEventListener('mouseover', hovered, false);
+    keyboardPlug.removeEventListener('mousedown', active, false);
+    const newKeyboard = createKeyboard('english');
+    keyboardWrapper.appendChild(newKeyboard);
+  }
+}
+document.addEventListener('keydown', keyDown, false);
+document.addEventListener('keyup', changeLanguage, false);
+
+// const keyboardPlug = document.querySelector('keyboard');
+// const keyboardPlug = keyboardWrapper.getElementsByClassName('keyboard')[0];
+keyboardWrapper.addEventListener('mouseover', hovered, false);
+keyboardWrapper.addEventListener('mousedown', active, false);
