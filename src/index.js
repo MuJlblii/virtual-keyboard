@@ -665,7 +665,7 @@ function active(event) {
       textArea.setRangeText(event.srcElement.dataset.key, textArea.selectionStart, textArea.selectionEnd, 'end');
     } else if (event.type === 'mousedown' && (event.target.dataset.keyCode === 'ShiftRight' || event.target.dataset.keyCode === 'ShiftLeft')) {
       keyboardWrapper.removeChild(keyboardWrapper.lastChild);
-      console.log('event.target -- mouse Shift --', event.target.dataset.keyCode);
+      // console.log('event.target -- mouse Shift --', event.target.dataset.keyCode);
       localStorage.setItem('mouseShift', event.target.dataset.keyCode);
       const newKeyboard = createKeyboard('ShitPr');
       keyboardWrapper.appendChild(newKeyboard);
@@ -673,6 +673,15 @@ function active(event) {
       keyboardWrapper.removeChild(keyboardWrapper.lastChild);
       localStorage.removeItem('mouseShift');
       const newKeyboard = createKeyboard();
+      keyboardWrapper.appendChild(newKeyboard);
+    } else if (event.type === 'mouseup' && event.target.dataset.keyCode === 'CapsLock') {
+      keyboardWrapper.removeChild(keyboardWrapper.lastChild);
+      if (localStorage.getItem('capsLock') === '1') {
+        localStorage.setItem('capsLock', '0');
+      } else {
+        localStorage.setItem('capsLock', '1');
+      }
+      const newKeyboard = createKeyboard(localStorage.getItem('capsLock') === '1' ? 'CapsLock' : '');
       keyboardWrapper.appendChild(newKeyboard);
     }
   }
