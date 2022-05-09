@@ -368,14 +368,48 @@ function keyUp(event) {
 }
 
 function keyDown(event) {
+  event.preventDefault();
   const keyCode = event.code;
   console.log('event - keyDown', event);
   const hoveredItem = document.querySelector(`div[data-key-code="${keyCode}"]`);
   hoveredItem.classList.add('active');
+  if (!event.metaKey) {
+    textArea.setRangeText((hoveredItem.className.includes('meta') ? '' : hoveredItem.dataset.key), textArea.selectionStart, textArea.selectionEnd, 'end');
+  }
   if (event.key === 'Tab') {
     event.preventDefault();
     textArea.setRangeText('    ', textArea.selectionStart, textArea.selectionEnd, 'end');
   }
+  if (event.key === ' ') {
+    textArea.setRangeText(hoveredItem.dataset.key, textArea.selectionStart, textArea.selectionEnd, 'end');
+  }
+  if (event.key === 'Backspace') {
+    if (textArea.selectionStart) {
+      textArea.setRangeText('', textArea.selectionStart - 1, textArea.selectionEnd, 'end');
+    }
+  }
+  if (event.key === 'Delete') {
+    if (textArea.selectionEnd + 1) {
+      textArea.setRangeText('', textArea.selectionStart, textArea.selectionEnd + 1, 'end');
+    }
+  }
+  if (event.key === 'Enter') {
+    textArea.setRangeText('\n', textArea.selectionStart, textArea.selectionEnd, 'end');
+  }
+  if (event.key === 'ArrowLeft') {
+    if (textArea.selectionStart) {
+      textArea.setRangeText('', textArea.selectionStart - 1, textArea.selectionEnd - 1, 'start');
+    }
+  }
+  if (event.key === 'ArrowRight') {
+    if (textArea.selectionEnd) {
+      textArea.setRangeText('', textArea.selectionStart + 1, textArea.selectionEnd + 1, 'end');
+    }
+  }
+  if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+    textArea.setRangeText(hoveredItem.dataset.key, textArea.selectionStart, textArea.selectionEnd, 'end');
+  }
+
   textArea.focus();
   document.addEventListener('keyup', keyUp, false);
   localStorage.setItem('textArea', textArea.value);
