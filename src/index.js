@@ -580,6 +580,24 @@ function active(event) {
       textArea.setRangeText('    ', textArea.selectionStart, textArea.selectionEnd, 'end');
     } else if ((event.type === 'mouseup') && ((event.target.dataset.keyCode === 'ArrowUp') || (event.target.dataset.keyCode === 'ArrowDown'))) {
       textArea.setRangeText(event.srcElement.dataset.key, textArea.selectionStart, textArea.selectionEnd, 'end');
+    } else if (event.type === 'mousedown' && (event.target.dataset.keyCode === 'ShiftRight' || event.target.dataset.keyCode === 'ShiftLeft')) {
+      keyboardWrapper.removeChild(keyboardWrapper.lastChild);
+      // keyboardPlug.removeEventListener('mouseover', hovered, false);
+      // keyboardPlug.removeEventListener('mousedown', active, false);
+      // const languages = localStorage.getItem('language') === 'english' ? 'russian' : 'english';
+      // localStorage.setItem('language', languages);
+      const newKeyboard = createKeyboard('ShitPr');
+      keyboardWrapper.appendChild(newKeyboard);
+      const hoveredShift = event.target;
+      hoveredShift.classList.add('active');
+    } else if (event.type === 'mouseup' && (event.target.dataset.keyCode === 'ShiftRight' || event.target.dataset.keyCode === 'ShiftLeft')) {
+      keyboardWrapper.removeChild(keyboardWrapper.lastChild);
+      // keyboardPlug.removeEventListener('mouseover', hovered, false);
+      // keyboardPlug.removeEventListener('mousedown', active, false);
+      // const languages = localStorage.getItem('language') === 'english' ? 'russian' : 'english';
+      // localStorage.setItem('language', languages);
+      const newKeyboard = createKeyboard();
+      keyboardWrapper.appendChild(newKeyboard);
     }
   }
   localStorage.setItem('textArea', textArea.value);
