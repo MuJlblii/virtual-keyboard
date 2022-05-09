@@ -303,7 +303,12 @@ const keys = {
 
 const arrayKeys = Object.entries(keys);
 
-function createKeyboard(language) {
+function createKeyboard() {
+  const language = localStorage.getItem('language') ? localStorage.getItem('language') : 'english';
+  localStorage.setItem('language', language);
+  // if (localStorage.getItem('language')) {
+  //   let language = localStorage.getItem('language');
+  // }
   const keyboard = document.createElement('div');
   keyboard.classList.add('keyboard');
   let keyboardRow = document.createElement('div');
@@ -350,7 +355,7 @@ function createKeyboard(language) {
 
 formArea.appendChild(textArea);
 keyboardWrapper.appendChild(formArea);
-keyboardWrapper.appendChild(createKeyboard('russian'));
+keyboardWrapper.appendChild(createKeyboard());
 wrapper.appendChild(keyboardWrapper);
 body.appendChild(wrapper);
 
@@ -435,7 +440,9 @@ function changeLanguage(event) {
     keyboardWrapper.removeChild(keyboardWrapper.lastChild);
     keyboardPlug.removeEventListener('mouseover', hovered, false);
     keyboardPlug.removeEventListener('mousedown', active, false);
-    const newKeyboard = createKeyboard('english');
+    const languages = localStorage.getItem('language') === 'english' ? 'russian' : 'english';
+    localStorage.setItem('language', languages);
+    const newKeyboard = createKeyboard();
     keyboardWrapper.appendChild(newKeyboard);
   }
 }
