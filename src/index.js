@@ -461,7 +461,7 @@ const keys = {
 
 const arrayKeys = Object.entries(keys);
 
-function createKeyboard(shiftPr) {
+const createKeyboard = (shiftPr) => {
   const language = localStorage.getItem('language') ? localStorage.getItem('language') : 'english';
   localStorage.setItem('language', language);
   const languageCaps = language === 'english' ? 'capsEn' : 'capsRu';
@@ -548,7 +548,7 @@ function createKeyboard(shiftPr) {
   }
 
   return keyboard;
-}
+};
 
 formArea.appendChild(textArea);
 keyboardWrapper.appendChild(formArea);
@@ -559,16 +559,16 @@ body.appendChild(wrapper);
 
 const keyboardPlug = keyboardWrapper.getElementsByClassName('keyboard')[0];
 
-function keyUp(event) {
+const keyUp = (event) => {
   const keyCode = event.code;
   const hoveredItem = document.querySelector(`div[data-key-code="${keyCode}"]`);
   hoveredItem.classList.remove('active');
   if (localStorage.getItem('capsLock') === '1' && hoveredItem.dataset.keyCode === 'CapsLock') {
     hoveredItem.classList.add('active');
   }
-}
+};
 
-function keyDown(event) {
+const keyDown = (event) => {
   event.preventDefault();
   const keyCode = event.code;
   // console.log('event - keyDown', event);
@@ -614,9 +614,9 @@ function keyDown(event) {
   textArea.focus();
   document.addEventListener('keyup', keyUp, false);
   localStorage.setItem('textArea', textArea.value);
-}
+};
 
-function hovered(event) {
+const hovered = (event) => {
   // console.log('target -', event.target);
   // console.log('currentTarget -', event.currentTarget);
   if (event.target.className.includes('keys')) {
@@ -626,9 +626,9 @@ function hovered(event) {
   }
   event.stopPropagation();
   keyboardWrapper.addEventListener('mouseout', hovered, false);
-}
+};
 
-function active(event) {
+const active = (event) => {
   // console.log('event.target', event);
   if (event.target.className.includes('keys')) {
     const hoveredItem = event.target;
@@ -687,9 +687,9 @@ function active(event) {
   textArea.focus();
   event.stopPropagation();
   keyboardWrapper.addEventListener('mouseup', active, false);
-}
+};
 
-function changeLanguage(event) {
+const changeLanguage = (event) => {
   if ((event.ctrlKey) && (event.key === 'Alt')) {
     keyboardWrapper.removeChild(keyboardWrapper.lastChild);
     keyboardPlug.removeEventListener('mouseover', hovered, false);
@@ -699,9 +699,9 @@ function changeLanguage(event) {
     const newKeyboard = createKeyboard();
     keyboardWrapper.appendChild(newKeyboard);
   }
-}
+};
 
-function shiftPress(event) {
+const shiftPress = (event) => {
   if (event.type === 'keydown') {
     if (event.key === 'Shift' && event.repeat === false) {
       keyboardWrapper.removeChild(keyboardWrapper.lastChild);
@@ -727,9 +727,9 @@ function shiftPress(event) {
   }
   // event.stopPropagation();
   document.addEventListener('keyup', shiftPress, false);
-}
+};
 
-function capsPress(event) {
+const capsPress = (event) => {
   if (event.type === 'keyup' && event.key === 'CapsLock') {
     keyboardWrapper.removeChild(keyboardWrapper.lastChild);
     keyboardPlug.removeEventListener('mouseover', hovered, false);
@@ -743,7 +743,7 @@ function capsPress(event) {
     const newKeyboard = createKeyboard(localStorage.getItem('capsLock') === '1' ? 'CapsLock' : '');
     keyboardWrapper.appendChild(newKeyboard);
   }
-}
+};
 
 document.addEventListener('keydown', keyDown, false);
 document.addEventListener('keyup', changeLanguage, false);
